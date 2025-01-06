@@ -16,7 +16,6 @@ const ParticleCanvas = () => {
     // Variables globales
     const particles = [];
     const dustParticles = [];
-
     let backgroundHue = 0;
     let frameCount = 0;
     let autoDrift = true; // If true, particles gently drift on their own
@@ -232,103 +231,102 @@ const ParticleCanvas = () => {
     }
 
     class DustParticle {
-      constructor() {
-        Object.assign(this, {
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: Math.random() * 1.5 + 0.5,
-          hue: Math.random() * 360,
-          vx: (Math.random() - 0.5) * 0.05,
-          vy: (Math.random() - 0.5) * 0.05,
-        });
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = Math.random() * 2 + 1;
+        this.alpha = Math.random() * 0.3 + 0.2;
+        this.speed = Math.random() * 0.2 + 0.1;
+        this.direction = Math.random() * Math.PI * 2;
+        this.color = `hsl(${Math.random() * 360}, 50%, 80%)`;
       }
 
       update() {
-        this.x = (this.x + this.vx + canvas.width) % canvas.width;
-        this.y = (this.y + this.vy + canvas.height) % canvas.height;
-        this.hue = (this.hue + 0.1) % 360;
+        this.x += Math.cos(this.direction) * this.speed;
+        this.y += Math.sin(this.direction) * this.speed;
+        this.alpha -= 0.01;
       }
 
       draw(ctx) {
-        ctx.fillStyle = `hsla(${this.hue}, 30%, 70%, 0.3)`;
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.alpha;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+
+      isDead() {
+        return this.alpha <= 0;
       }
     }
 
-    const resizeCanvas = () => {
+    function resizeCanvas() {
       setCanvasSize({
         width: window.innerWidth,
         height: window.innerHeight,
       });
-    };
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
 
-    const createParticles = () => {
-      particles.length = 0;
-      dustParticles.length = 0;
+    function animateParticles() {
+      if (canvas) {
+        frameCount++;
 
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((particle) => {
+          particle.update(mouse);
+          particle.draw(ctx);
+        });
+
+        dustParticles.forEach((dust) => {
+          dust.update();
+          dust.draw(ctx);
+        });
+
+        // Eliminar las partículas que ya no son visibles
+        particles.filter((p) => !p.isDead());
+        dustParticles.filter((dust) => !dust.isDead());
+
+        // Controlar las partículas de conexión
+        connectParticles();
+
+        requestAnimationFrame(animateParticles);
+      }
+    }
+
+    function start() {
+      resizeCanvas();
+
+      // Agregar partículas iniciales
       const numParticles = adjustParticleCount();
       for (let i = 0; i < numParticles; i++) {
         particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
       }
 
-      for (let i = 0; i < 200; i++) {
-        dustParticles.push(new DustParticle());
+      // Agregar partículas de polvo
+      for (let i = 0; i < 80; i++) {
+        dustParticles.push(new DustParticle(Math.random() * canvas.width, Math.random() * canvas.height));
       }
-    };
 
-    const drawBackground = () => {
-      backgroundHue = (backgroundHue + 0.2) % 360;
-      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-      gradient.addColorStop(0, `hsla(${backgroundHue}, 100%, 10%)`); // Oscurecer el color inicial
-      gradient.addColorStop(1, `hsla(${backgroundHue + 80}, 10%, 10%)`); // Oscurecer el color final
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-    };
+      animateParticles();
+    }
 
-    const animate = () => {
-      frameCount++;
-
-      drawBackground();
-      particles.forEach(p => p.update(mouse));
-      dustParticles.forEach(p => p.update());
-      particles.forEach(p => p.draw(ctx));
-      dustParticles.forEach(p => p.draw(ctx));
-
-      connectParticles();
-      
-      particles.forEach((p, index) => {
-        if (p.isDead()) particles.splice(index, 1);
-      });
-
-      requestAnimationFrame(animate);
-    };
-
-    window.addEventListener('mousemove', (e) => mouse.set({ x: e.x, y: e.y }));
-    window.addEventListener('mouseleave', () => mouse.reset());
     window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('mousemove', (e) => mouse.set({ x: e.clientX, y: e.clientY }));
+    window.addEventListener('mouseout', () => mouse.reset());
 
-    resizeCanvas();
-    createParticles();
-    animate();
+    start();
 
     return () => {
-      window.removeEventListener('mousemove', (e) => mouse.set({ x: e.x, y: e.y }));
-      window.removeEventListener('mouseleave', mouse.reset);
       window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('mousemove', (e) => mouse.set({ x: e.clientX, y: e.clientY }));
+      window.removeEventListener('mouseout', () => mouse.reset());
     };
   }, []);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      width={canvasSize.width}
-      height={canvasSize.height}
-      style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }}
-    />
-  );
+  return <canvas ref={canvasRef} width={canvasSize.width} height={canvasSize.height} />;
 };
-
 
 export default ParticleCanvas;
