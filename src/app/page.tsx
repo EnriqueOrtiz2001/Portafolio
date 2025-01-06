@@ -9,9 +9,7 @@ import { useRouter } from 'next/navigation';
 const Page = () => {
   const router = useRouter();
 
-  const handleMoreInfo = () => {
-    router.push('/page2'); // Redirige a page2.tsx
-  };
+  
 
   return (
     <div className="page-container">

@@ -3,7 +3,6 @@
 import AnimatedBackground from '@/components/AnimatedBackground';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 import React from 'react';
 import './global.css'; 
 import './global2.css'; 
