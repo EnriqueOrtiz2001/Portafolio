@@ -1,6 +1,6 @@
 'use client';
 
-import AnimatedBackground from '@/components/AnimatedBackground';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -13,9 +13,7 @@ const Inicio = () => {
   return (
     <div className="container">
       <title>Enrique | Portafolio</title>
-<div className="animated-bg">
-        <AnimatedBackground />
-      </div>
+
       {/* ---------------- HEADER ---------------- */}
       <header className="header">
       {/* Fondo Animado */}
