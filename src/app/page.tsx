@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React from 'react';
 import Spline from '@splinetool/react-spline';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 const Page = () => {
  
