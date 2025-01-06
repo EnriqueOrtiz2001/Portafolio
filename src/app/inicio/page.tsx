@@ -9,7 +9,7 @@ import './global.css';
 import './global2.css'; 
 
 const Inicio = () => {
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  
 
   return (
     <div className="container">
@@ -167,24 +167,26 @@ const Inicio = () => {
   {/* Lenguajes, Herramientas y Bases de Datos */}
     <div className="skills-categories">
     <div className="text2">Lenguajes</div>
-      <div className="skills-icons">
-        <img src="/Java.png" alt="JavaScript" />
-        <img src="/Python.png" alt="Python" />
-        <img src="/js.png" alt="Java" />
-        <img src="/Next.png" alt="Next" />
-      </div>
+    <div className="skills-icons">
+  <Image src="/Java.png" alt="JavaScript" width={5000} height={5000} />
+  <Image src="/Python.png" alt="Python" width={5000} height={5000} />
+  <Image src="/js.png" alt="Java" width={5000} height={5000} />
+  <Image src="/Next.png" alt="Next" width={5000} height={5000} />
+</div>
+
+      
       
   
       <div className="skills-icons">
-        <img src="/Git.png" alt="Git" />
-        <img src="/Docker.png" alt="Docker" />
-        <img src="/Laravel.png" alt="Laravel" />
+        <Image src="/Git.png" alt="Git" width={50} height={50}/>
+        <Image src="/Docker.png" alt="Docker" width={50} height={50}/>
+        <Image src="/Laravel.png" alt="Laravel" width={50} height={50}/>
       </div>
       
      
       <div className="skills-icons">
-        <img src="/mysql.png" alt="MySQL" />
-        <img src="/Mongo.png" alt="MongoDB" />
+        <Image src="/mysql.png" alt="MySQL" width={50} height={50}/>
+        <Image src="/Mongo.png" alt="MongoDB" width={50} height={50}/>
       </div>
     </div>
   </section>
@@ -195,7 +197,7 @@ const Inicio = () => {
 
   <div className="card2">
     <div className="top">
-      <img src="/fisei.jpg" alt="UTA Logo" className="card-img" />
+      <Image src="/fisei.jpg" alt="UTA Logo" className="card-img" width={2000} height={2000}/>
       <p className="title">Prácticas en la UTA</p>
     </div>
     <p className="desc">Redes y sistemas: Instalación y mantenimiento de redes informáticas, gestión de las páginas web de la universidad, reparación y optimización de computadoras, reseteo de equipos y configuración de redes internas. Además, colaboré en la implementación de nuevos sistemas de comunicación interna y soporte técnico en la universidad.</p>
@@ -203,7 +205,7 @@ const Inicio = () => {
 
   <div className="card2">
     <div className="top">
-      <img src="/sanf.png" alt="San Francisco Logo" className="card-img" />
+      <Image src="/sanf.png" alt="San Francisco Logo" className="card-img" width={1500} height={1500}/>
       <p className="title">Pasantías en Cooperativa San Francisco</p>
     </div>
     <p className="desc">Desarrollo de software: Creación de aplicaciones internas y una auditoría integral para la prevención de daños en el software y hardware. Me encargué de verificar el estado de los equipos, prevenir fallos en los servidores y mejorar la seguridad informática de los sistemas. Esto ayudó a reducir el riesgo de pérdida de datos y a mejorar el rendimiento general de los equipos y servidores de la cooperativa.</p>
@@ -211,7 +213,7 @@ const Inicio = () => {
 
   <div className="card2">
     <div className="top">
-      <img src="/santaRosa.png" alt="Junta de Agua Logo" className="card-img" />
+      <Image src="/santaRosa.png" alt="Junta de Agua Logo" className="card-img" width={3350} height={5000}/>
       <p className="title">Trabajo en Junta de Agua Santa Rosa</p>
     </div>
     <p className="desc">Soporte técnico: Mantenimiento de sistemas y atención a usuarios, incluyendo la implementación de un sistema de facturación para la medición del agua en las comunidades. Este sistema facilitó el proceso de cobro y control de consumo, mejorando la eficiencia operativa de la junta y proporcionando una herramienta más precisa y fácil de usar para los usuarios y el personal administrativo.</p>
@@ -219,24 +221,21 @@ const Inicio = () => {
 </section>
       {/* ---------------- PROYECTOS ---------------- */}
       <section id="proyectos" className="section">
-      
-      <div className="text2">Proyectos</div>
+  <div className="text2">Proyectos</div>
   <div className="projects-grid">
-    
     {[
-      { id: 1, link: 'https://github.com/ChristianCLop/simdrive-frontend', img: '/SimDrive.png', title: 'SimDrive', description: 'Es un mundo virtual interactivo creado en Hippoviwer diseñado para enseñar a los usuarios sobre las señaléticas de tránsito y las reglas viales. A través de este entorno, los usuarios pueden aprender de manera práctica sobre las señales de tránsito, normas de seguridad vial y otras regulaciones del tráfico, de una manera didáctica y accesible.' },
-      { id: 2, link: 'https://github.com/Anthony6887/Evento_Cultural', img: '/Evento_Cultural.png', title: 'Evento Cultural', description: 'Es una plataforma para un evento en Pelileo que busca promover el conocimiento sobre la cultura y geografía de Ecuador mediante una serie de preguntas y respuestas interactivas. Los participantes pueden conocer diversos aspectos del país, desde su historia hasta su diversidad cultural, mientras interactúan de manera divertida y educativa.' },
-      { id: 3, link: 'https://github.com/EnriqueOrtiz2001/AdoptPet', img: '/ADOPTPET.png', title: 'AdoptPet', description: 'Un sistema en línea para la adopción de mascotas que conecta a personas interesadas en adoptar con aquellos que necesitan un hogar para sus animales. Ofrece una plataforma fácil de usar para buscar diferentes tipos de mascotas disponibles para adopción, con detalles sobre cada animal, su comportamiento y necesidades, lo que facilita el proceso tanto para los adoptantes como para los dueños.' },
-      { id: 4, link: 'https://github.com/EnriqueOrtiz2001/MarketFly', img: '/marketfly.png', title: 'MarketFly', description: ' Es una plataforma de compra y venta de productos electrónicos que permite a los usuarios comprar y vender artículos como teléfonos móviles, computadoras, cámaras y otros dispositivos electrónicos. Este sistema proporciona un mercado fácil de usar con filtros de búsqueda y opciones de pago seguras, ofreciendo una experiencia de compra eficiente y confiable para los usuarios.' },
-      { id: 5, link: 'https://github.com/EnriqueOrtiz2001/ProyectoSistemaRegistros', img: '/sistemaR.png', title: 'Sistema Registro', description: 'Es una aplicación para la gestión y registro de documentos dentro de una organización o entidad. Permite almacenar, clasificar y buscar documentos de manera digital, facilitando el proceso de registro y gestión de archivos importantes, y garantizando una mayor eficiencia en el manejo de información.' },
-      { id: 6, link: 'https://github.com/PSW-GourtmetGO/GourtmetGo-Web-FrontEnd', img: '/Go.png', title: 'GourtmetGo', description: 'Un sistema diseñado para gestionar todos los aspectos de un restaurante, desde la creación de menús hasta la asignación de mesas y la gestión de los meseros. Esta plataforma incluye herramientas para facilitar el proceso de pedidos, la asignación de platos a las mesas, la actualización de inventarios y la gestión de las finanzas del restaurante, optimizando la operativa diaria y mejorando la experiencia tanto para los clientes como para los empleados.' }
+      { id: 1, link: 'https://github.com/ChristianCLop/simdrive-frontend', img: '/SimDrive.png', title: 'SimDrive', description: 'Es un mundo virtual interactivo creado en Hippoviwer diseñado para enseñar a los usuarios sobre las señaléticas de tránsito y las reglas viales.' },
+      { id: 2, link: 'https://github.com/Anthony6887/Evento_Cultural', img: '/Evento_Cultural.png', title: 'Evento Cultural', description: 'Es una plataforma para un evento en Pelileo que busca promover el conocimiento sobre la cultura y geografía de Ecuador.' },
+      { id: 3, link: 'https://github.com/EnriqueOrtiz2001/AdoptPet', img: '/ADOPTPET.png', title: 'AdoptPet', description: 'Un sistema en línea para la adopción de mascotas que conecta a personas interesadas en adoptar con aquellos que necesitan un hogar para sus animales.' },
+      { id: 4, link: 'https://github.com/EnriqueOrtiz2001/MarketFly', img: '/marketfly.png', title: 'MarketFly', description: 'Es una plataforma de compra y venta de productos electrónicos que permite a los usuarios comprar y vender artículos.' },
+      { id: 5, link: 'https://github.com/EnriqueOrtiz2001/ProyectoSistemaRegistros', img: '/sistemaR.png', title: 'Sistema Registro', description: 'Es una aplicación para la gestión y registro de documentos dentro de una organización.' },
+      { id: 6, link: 'https://github.com/PSW-GourtmetGO/GourtmetGo-Web-FrontEnd', img: '/Go.png', title: 'GourtmetGo', description: 'Un sistema diseñado para gestionar todos los aspectos de un restaurante.' }
     ].map((project, index) => (
       <div key={index} className="card">
         <div className="content">
           {/* Parte Trasera */}
           <div className="back">
             <div className="back-content">
-              
               <div className="description">
                 <div className="title">
                   <p><strong>{project.title}</strong></p>
@@ -250,10 +249,12 @@ const Inicio = () => {
           <div className="front">
             <div className="front-content">
               {/* Imagen al lado derecho */}
-              <img
+              <Image
                 className="img"
                 src={project.img} // Diferente imagen para cada proyecto
                 alt={`Imagen de Proyecto ${project.id}`}
+                width={300} // Especifica el ancho de la imagen
+                height={200} // Especifica la altura de la imagen
               />
               <div className="project-info">
                 <strong>{project.title}</strong>
@@ -276,29 +277,30 @@ const Inicio = () => {
 </section>
 
 
+
 {/* ---------------- certificados ---------------- */}
 <section className="certificates">
   <h2 className="certificates-title">Mis Certificados</h2>
   <div className="certificates-container">
     <div className="certificate-card">
-      <img src="/certificado1.png" alt="Certificado 1" className="certificate-image" />
+      <Image src="/certificado1.png" alt="Certificado 1" className="certificate-image" width={5000} height={5000}/>
       <p className="certificate-name">V Conference on Computer Science, Electronics and Industrial Engineering (CSEI 2023)</p>
     </div>
     <div className="certificate-card">
-      <img src="/certificado2.png" alt="Certificado 2" className="certificate-image" />
+      <Image src="/certificado2.png" alt="Certificado 2" className="certificate-image" width={5000} height={5000}/>
       <p className="certificate-name">Certificado en JavaScript Essentials 1</p>
     </div>
     <div className="certificate-card">
-      <img src="/certificado3.png" alt="Certificado 3" className="certificate-image" />
+      <Image src="/certificado3.png" alt="Certificado 3" className="certificate-image" width={5000} height={5000}/>
       <p className="certificate-name">Artículo: SIMDRIVE: A DIDACTIC IMMERSIVE LEARNING EXPERIENCE WITH TRAFFIC LAWS AND
       DRIVING SKILLS IN VIRTUAL WORLDS.</p>
     </div>
     <div className="certificate-card">
-      <img src="/certificado4.png" alt="Certificado 4" className="certificate-image" />
+      <Image src="/certificado4.png" alt="Certificado 4" className="certificate-image" width={5000} height={5000}/>
       <p className="certificate-name">VI CONGRESO INTERNACIONAL DE CIENCIA DE LA COMPUTACION, ELECTRONICA E INGENIERÍA INDUSTRIAL CSEI 2024</p>
     </div>
     <div className="certificate-card">
-      <img src="/certificado5.png" alt="Certificado 5" className="certificate-image" />
+      <Image src="/certificado5.png" alt="Certificado 5" className="certificate-image" width={5000} height={5000}/>
       <p className="certificate-name">Certificado en Python Essentials 2</p>
     </div>
   </div>
@@ -315,17 +317,17 @@ const Inicio = () => {
       <ul>
         <li>
           <a href="https://www.linkedin.com/in/enrique-ortiz-b47b8711b/" target="_blank">
-            <img src="/link.png" alt="LinkedIn" />
+            <Image src="/link.png" alt="LinkedIn" width={50} height={50}/>
           </a>
         </li>
         <li>
           <a href="https://www.instagram.com/enrique_ortiz15" target="_blank">
-            <img src="/insta.png" alt="Instagram" />
+            <Image src="/insta.png" alt="Instagram" width={50} height={50}/>
           </a>
         </li>
         <li>
           <a href="https://github.com/EnriqueOrtiz2001" target="_blank">
-            <img src="/github.png" alt="GitHub" />
+            <Image src="/github.png" alt="GitHub" width={50} height={50}/>
           </a>
         </li>
       </ul>
