@@ -238,22 +238,21 @@ const ParticleCanvas = () => {
         this.alpha = Math.random() * 0.3 + 0.2;
         this.speed = Math.random() * 0.2 + 0.1;
         this.direction = Math.random() * Math.PI * 2;
-        this.color = `hsl(${Math.random() * 360}, 50%, 80%)`;
+        this.vx = Math.cos(this.direction) * this.speed;
+        this.vy = Math.sin(this.direction) * this.speed;
       }
 
       update() {
-        this.x += Math.cos(this.direction) * this.speed;
-        this.y += Math.sin(this.direction) * this.speed;
-        this.alpha -= 0.01;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.alpha -= 0.01; // Reduce the opacity
       }
 
       draw(ctx) {
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = `hsla(${backgroundHue}, 50%, 60%, ${this.alpha})`;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
-        ctx.globalAlpha = 1;
       }
 
       isDead() {
@@ -261,72 +260,98 @@ const ParticleCanvas = () => {
       }
     }
 
-    function resizeCanvas() {
+    function createFirework(mouse) {
+      const p = new Particle(
+        mouse.x + Math.random() * 100 - 50,
+        mouse.y + Math.random() * 100 - 50,
+        true
+      );
+      particles.push(p);
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      frameCount++;
+
+      if (particles.length < adjustParticleCount()) {
+        for (let i = 0; i < adjustParticleCount() - particles.length; i++) {
+          particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+        }
+      }
+
+      // Create fireworks near mouse cursor
+      if (mouse.x !== null && mouse.y !== null && frameCount % 5 === 0) {
+        createFirework(mouse);
+      }
+
+      particles.forEach((particle) => {
+        particle.update(mouse);
+        particle.draw(ctx);
+      });
+
+      particles.filter((particle) => !particle.isDead()).forEach((particle) => {
+        dustParticles.push(
+          new DustParticle(particle.x, particle.y)
+        );
+      });
+
+      dustParticles.forEach((dustParticle) => {
+        dustParticle.update();
+        dustParticle.draw(ctx);
+      });
+
+      dustParticles.filter((dustParticle) => !dustParticle.isDead()).forEach((dustParticle) => {
+        dustParticles.push(
+          new DustParticle(dustParticle.x, dustParticle.y)
+        );
+      });
+
+      connectParticles();
+
+      // Adjust background hue
+      backgroundHue += 0.1;
+      if (backgroundHue >= 360) backgroundHue = 0;
+    }
+
+    // Adjust canvas size when window is resized
+    const resizeCanvas = () => {
       setCanvasSize({
         width: window.innerWidth,
         height: window.innerHeight,
       });
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-    }
-
-    function animateParticles() {
-      if (canvas) {
-        frameCount++;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach((particle) => {
-          particle.update(mouse);
-          particle.draw(ctx);
-        });
-
-        dustParticles.forEach((dust) => {
-          dust.update();
-          dust.draw(ctx);
-        });
-
-        // Eliminar las partículas que ya no son visibles
-        particles.filter((p) => !p.isDead());
-        dustParticles.filter((dust) => !dust.isDead());
-
-        // Controlar las partículas de conexión
-        connectParticles();
-
-        requestAnimationFrame(animateParticles);
-      }
-    }
-
-    function start() {
-      resizeCanvas();
-
-      // Agregar partículas iniciales
-      const numParticles = adjustParticleCount();
-      for (let i = 0; i < numParticles; i++) {
-        particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
-      }
-
-      // Agregar partículas de polvo
-      for (let i = 0; i < 80; i++) {
-        dustParticles.push(new DustParticle(Math.random() * canvas.width, Math.random() * canvas.height));
-      }
-
-      animateParticles();
-    }
+    };
 
     window.addEventListener('resize', resizeCanvas);
-    window.addEventListener('mousemove', (e) => mouse.set({ x: e.clientX, y: e.clientY }));
-    window.addEventListener('mouseout', () => mouse.reset());
+    window.addEventListener('mousemove', (e) => {
+      mouse.set({
+        x: e.x,
+        y: e.y,
+      });
+    });
+    window.addEventListener('mouseout', () => {
+      mouse.reset();
+    });
 
-    start();
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Start animation loop
+    const animationLoop = () => {
+      render();
+      requestAnimationFrame(animationLoop);
+    };
+    animationLoop();
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('mousemove', (e) => mouse.set({ x: e.clientX, y: e.clientY }));
-      window.removeEventListener('mouseout', () => mouse.reset());
+      window.removeEventListener('mousemove', () => {});
+      window.removeEventListener('mouseout', () => {});
     };
-  }, []);
+  }, [canvasSize]);
 
-  return <canvas ref={canvasRef} width={canvasSize.width} height={canvasSize.height} />;
+  return <canvas ref={canvasRef}></canvas>;
 };
 
 export default ParticleCanvas;
