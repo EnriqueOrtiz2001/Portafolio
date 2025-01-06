@@ -38,7 +38,7 @@ const Page = () => {
  {/* Imagen centrada */}
  <section className="image-section">
         <Image
-          src="/enrique2.jpg"
+          src="/Enrique2.jpg"
           alt="Imagen de Enrique"
           width={200}
           height={200}

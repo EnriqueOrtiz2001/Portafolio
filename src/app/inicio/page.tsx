@@ -165,7 +165,7 @@ const Inicio = () => {
     <div className="skills-categories">
     <div className="text2">Lenguajes</div>
     <div className="skills-icons">
-  <Image src="/Java.png" alt="JavaScript" width={5000} height={5000} />
+  <Image src="/java.png" alt="JavaScript" width={5000} height={5000} />
   <Image src="/Python.png" alt="Python" width={5000} height={5000} />
   <Image src="/js.png" alt="Java" width={5000} height={5000} />
   <Image src="/Next.png" alt="Next" width={5000} height={5000} />
@@ -175,7 +175,7 @@ const Inicio = () => {
       
   
       <div className="skills-icons">
-        <Image src="/Git.png" alt="Git" width={50} height={50}/>
+        <Image src="/git.png" alt="Git" width={50} height={50}/>
         <Image src="/Docker.png" alt="Docker" width={50} height={50}/>
         <Image src="/Laravel.png" alt="Laravel" width={50} height={50}/>
       </div>
