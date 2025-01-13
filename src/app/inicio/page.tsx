@@ -67,10 +67,11 @@ const Inicio = () => {
     <div className="texto-sobre-mi">
      
       <p className="saludo">
-        ¡Hola! Soy <strong>ENRIQUE ORTIZ</strong>, tengo <strong>23 AÑOS</strong> y soy estudié de la 
+        ¡Hola! Soy <strong>ENRIQUE ORTIZ</strong>, tengo <strong>23 AÑOS</strong> y estudié de la 
         <strong> UNIVERSIDAD TÉCNICA DE AMBATO</strong>. <br />
         Soy un Ingeniero en Software con experiencia como programador full-stack junior🐭, especializado en el desarrollo de aplicaciones web y móviles.  Siempre estoy motivado para aprender, crecer profesionalmente y contribuir al éxito de proyectos innovadores. 🚀<br />
-        Me gusta el ajedrez♟️, escuchar música 🎵 y hacer Stream🔴
+Soy jugador profesional de ajedrez ♟️ desde pequeño, amante de la música 🎵 de todos los géneros y fanático de los videojuegos 🎮. Hago streams 🔴 donde comparto contenido sobre programación, desarrollo de software y partidas de videojuegos.<br />
+        ¡La combinación perfecta de estrategia, creatividad y diversión!
       </p>
     </div>
   </div>
