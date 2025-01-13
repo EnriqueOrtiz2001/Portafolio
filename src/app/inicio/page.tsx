@@ -69,7 +69,7 @@ const Inicio = () => {
       <p className="saludo">
         ¡Hola! Soy <strong>ENRIQUE ORTIZ</strong>, tengo <strong>23 AÑOS</strong> y soy estudié de la 
         <strong> UNIVERSIDAD TÉCNICA DE AMBATO</strong>. <br />
-        Soy un Ingeniero en Software con experiencia como programador full-stack junior, especializado en el desarrollo de aplicaciones web y móviles.  Siempre estoy motivado para aprender, crecer profesionalmente y contribuir al éxito de proyectos innovadores. 🚀<br />
+        Soy un Ingeniero en Software con experiencia como programador full-stack junior🐭, especializado en el desarrollo de aplicaciones web y móviles.  Siempre estoy motivado para aprender, crecer profesionalmente y contribuir al éxito de proyectos innovadores. 🚀<br />
         Me gusta el ajedrez♟️, escuchar música 🎵 y hacer Stream🔴
       </p>
     </div>
